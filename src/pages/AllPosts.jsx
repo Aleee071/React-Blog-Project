@@ -66,7 +66,7 @@ function AllPosts() {
 			<Container>
 				<div className='py-6 px-4 bg-gray-800 rounded-lg shadow-lg text-gray-100'>
 					<h1 className='text-2xl font-bold text-center mb-8'>
-						All Blogs<span className='text-blue-500 font-bold'>.</span>
+						All Blogs <span className='text-blue-500 font-bold'>.</span>
 					</h1>
 					<Toast
 						message={toastMessage}

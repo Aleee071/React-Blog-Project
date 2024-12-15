@@ -73,7 +73,7 @@ function Home() {
 					/>
 					<div className='py-6 px-4 bg-gray-800 rounded-lg shadow-lg text-gray-100'>
 						<h1 className='text-2xl font-bold text-center mb-8'>
-							Welcome to the Blog
+							Welcome to the Blog{" "}
 							<span className='text-blue-500 font-bold'>.</span>
 						</h1>
 						<div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6'>
