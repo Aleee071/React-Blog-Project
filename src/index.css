@@ -1,0 +1,33 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Add this to your global CSS */
+@media (max-width: 768px) {
+	header nav ul {
+		flex-wrap: wrap;
+		justify-content: center;
+	}
+	button {
+		width: 100%; /* Makes buttons full width on small screens */
+	}
+}
+
+/* footer {
+	background-image: linear-gradient(to right, #2c3e50, #4ca1af);
+	border-top: 1px solid #333;
+} */
+
+footer {
+  background-color: #111; /* Dark background */
+  color: #cfcfcf; /* Light gray text */
+  border-top: 1px solid #333; /* Subtle border at the top */
+}
+
+footer a {
+  color: #cfcfcf; /* Light gray links */
+}
+
+footer a:hover {
+  color: #fff; /* White on hover */
+}
