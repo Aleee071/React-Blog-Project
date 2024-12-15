@@ -23,7 +23,6 @@ function Home() {
 			try {
 				// Check if posts already exist in Redux
 				if (posts.length > 0) {
-					console.log("Posts already exist in Redux");
 					localStorage.setItem("activePosts", JSON.stringify(posts)); // Cache in localStorage
 					setLoading(false);
 					setToastMessage("Posts loaded successfully!");
@@ -34,7 +33,6 @@ function Home() {
 				// Try loading posts from localStorage
 				const cachedPosts = localStorage.getItem("activePosts");
 				if (cachedPosts && JSON.parse(cachedPosts).length > 0) {
-					console.log("Posts found in localStorage In HOME");
 					dispatch(fetchActivePostsSuccess({ posts: JSON.parse(cachedPosts) }));
 					setLoading(false);
 					return;
@@ -43,7 +41,6 @@ function Home() {
 				// Fetch from Appwrite if not in store or localStorage
 				const response = await postManager.getActivePosts();
 				if (response) {
-					console.log("Posts fetched from Appwrite");
 					const fetchedPosts = response.documents;
 					dispatch(fetchActivePostsSuccess({ posts: fetchedPosts }));
 					localStorage.setItem("activePosts", JSON.stringify(fetchedPosts)); // Cache in localStorage
