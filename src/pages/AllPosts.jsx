@@ -17,13 +17,10 @@ function AllPosts() {
 		setToastMessage("");
 	};
 
-	console.log("all posts:", posts.length);
-
 	useEffect(() => {
 		async function fetchPosts() {
 			try {
 				if (posts.length > 0) {
-					console.log("Fetch posts from redux");
 					localStorage.setItem("allPosts", JSON.stringify(posts));
 
 					setLoading(false);
@@ -35,8 +32,6 @@ function AllPosts() {
 				//Fetch posts from localStorage
 				const cachedPosts = localStorage.getItem("allPosts");
 				if (cachedPosts) {
-					console.log("Posts found in localStorage");
-
 					dispatch(fetchPostsSuccess({ posts: JSON.parse(cachedPosts) }));
 					setLoading(false);
 					setToastMessage("Posts loaded successfully!");
@@ -47,7 +42,6 @@ function AllPosts() {
 				//Fetch posts from Appwrite
 				const response = await postManager.getAllPosts();
 				if (response) {
-					console.log("Posts fetched from Appwrite");
 					const fetchedPosts = response.documents;
 					dispatch(fetchPostsSuccess({ posts: fetchedPosts }));
 					localStorage.setItem("allPosts", JSON.stringify(fetchedPosts));

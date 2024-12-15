@@ -18,8 +18,6 @@ function Home() {
 		setToastMessage("");
 	};
 
-	console.log("home posts:", posts.length);
-
 	useEffect(() => {
 		async function fetchPosts() {
 			try {

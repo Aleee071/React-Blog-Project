@@ -84,7 +84,6 @@ function PostForm({ post }) {
 				}
 			} else {
 				dbPost = await postManager.createPost(updatedPostData);
-				console.log("new dbPost: ", dbPost);
 
 				if (dbPost) {
 					if (dbPost.status === "active") {
