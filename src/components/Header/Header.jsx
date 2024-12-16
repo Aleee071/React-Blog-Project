@@ -22,7 +22,7 @@ function Header() {
 		if (userData) {
 			setUserName(userData.name);
 		}
-	}, [userName]);
+	}, [userName, userData]);
 
 	const navItems = [
 		{ name: "Home", path: "/", active: true },
