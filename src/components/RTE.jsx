@@ -11,7 +11,6 @@ function RTE({ name, control, label, defaultValue = "" }) {
 				control={control}
 				render={({ field: { onChange } }) => (
 					<Editor
-						
 						initialValue={defaultValue}
 						apiKey='9e3x15lp4yyozaya64va2trm66lkl7qidkn815ccfpt1q1zl'
 						init={{
@@ -40,8 +39,7 @@ function RTE({ name, control, label, defaultValue = "" }) {
 							],
 							toolbar:
 								"undo redo | blocks | " +
-								"bold italic forecolor | alignleft aligncenter " +
-								"alignright alignjustify | bullist numlist outdent indent | " +
+								"bold italic forecolor | bullist numlist outdent indent | " +
 								"removeformat | help",
 							content_style:
 								"body { font-family:Helvetica,Arial,sans-serif; font-size:14px }",

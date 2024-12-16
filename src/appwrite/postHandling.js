@@ -15,7 +15,7 @@ export class PostManager {
 		try {
 			return await this.databases.createDocument(
 				conf.appwriteDatabaseId,
-				conf.appwriteCollectionId,
+				conf.collections.posts,
 				ID.unique(),
 				{ title, content, imageId, status, userId, userName }
 			);
@@ -37,7 +37,7 @@ export class PostManager {
 		try {
 			const updatedDoc = await this.databases.updateDocument(
 				conf.appwriteDatabaseId,
-				conf.appwriteCollectionId,
+				conf.collections.posts,
 				documentID,
 				{ title, content, imageId, status, userId, userName }
 			);
@@ -52,7 +52,7 @@ export class PostManager {
 		try {
 			await this.databases.deleteDocument(
 				conf.appwriteDatabaseId,
-				conf.appwriteCollectionId,
+				conf.collections.posts,
 				documentID
 			);
 			return true;
@@ -66,7 +66,7 @@ export class PostManager {
 		try {
 			return await this.databases.getDocument(
 				conf.appwriteDatabaseId,
-				conf.appwriteCollectionId,
+				conf.collections.posts,
 				documentID
 			);
 		} catch (error) {
@@ -79,7 +79,7 @@ export class PostManager {
 		try {
 			return await this.databases.listDocuments(
 				conf.appwriteDatabaseId,
-				conf.appwriteCollectionId,
+				conf.collections.posts,
 				[Query.equal("status", "active")]
 			);
 		} catch (error) {
@@ -91,7 +91,7 @@ export class PostManager {
 		try {
 			return await this.databases.listDocuments(
 				conf.appwriteDatabaseId,
-				conf.appwriteCollectionId
+				conf.collections.posts
 			);
 		} catch (error) {
 			console.log("appwrite service :: getAllPosts :: error", error);
