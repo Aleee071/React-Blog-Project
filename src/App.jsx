@@ -10,6 +10,8 @@ function App() {
 	const [loading, setLoading] = useState(true);
 	const dispatch = useDispatch();
 
+	console.log("hey there");
+
 	useEffect(() => {
 		accountManager
 			.getSession()
