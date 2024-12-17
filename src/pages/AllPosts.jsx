@@ -23,6 +23,8 @@ function AllPosts() {
 				if (posts.length > 0) {
 					localStorage.setItem("allPosts", JSON.stringify(posts));
 
+					console.log("posts fetched from store");
+
 					setLoading(false);
 					setToastMessage("Posts loaded successfully!");
 					setShowToast(true);
@@ -33,6 +35,9 @@ function AllPosts() {
 				const cachedPosts = localStorage.getItem("allPosts");
 				if (cachedPosts) {
 					dispatch(fetchPostsSuccess({ posts: JSON.parse(cachedPosts) }));
+
+					console.log("posts fetched from local storage");
+
 					setLoading(false);
 					setToastMessage("Posts loaded successfully!");
 					setShowToast(true);
@@ -45,6 +50,9 @@ function AllPosts() {
 					const fetchedPosts = response.documents;
 					dispatch(fetchPostsSuccess({ posts: fetchedPosts }));
 					localStorage.setItem("allPosts", JSON.stringify(fetchedPosts));
+
+					console.log("posts fetched from Appwrite");
+
 					setLoading(false);
 					setToastMessage("Posts loaded successfully!");
 					setShowToast(true);

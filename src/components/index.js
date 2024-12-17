@@ -24,6 +24,6 @@ export {
 	Select,
 	PostCard,
 	RTE,
-	PostForm,
 	Toast,
+	PostForm,
 };

@@ -14,7 +14,6 @@ function PostCard({ imageId, title, $id, content, userName }) {
 						src={fileManager.getFilePreview(imageId)}
 						alt={title}
 						className='w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-300'
-						loading='lazy'
 					/>
 				</div>
 

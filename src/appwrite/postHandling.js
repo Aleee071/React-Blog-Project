@@ -98,6 +98,19 @@ export class PostManager {
 			throw error;
 		}
 	}
+
+	async getPostsByUserId(userId) {
+		try {
+			return await this.databases.listDocuments(
+				conf.appwriteDatabaseId,
+				conf.collections.posts,
+				[Query.equal("userId", userId)]
+			);
+		} catch (error) {
+			console.log("appwrite service :: getPostsByUserId :: error", error);
+			throw error;
+		}
+	}
 }
 
 const postManager = new PostManager();

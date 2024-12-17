@@ -1,4 +1,3 @@
-import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 import "./index.css";
 import App from "./App.jsx";
@@ -18,6 +17,7 @@ import Login from "./pages/Login.jsx";
 import Post from "./pages/Post.jsx";
 import AllPosts from "./pages/AllPosts.jsx";
 import EditPost from "./pages/EditPost.jsx";
+import Profile from "./pages/Profile.jsx";
 
 const router = createBrowserRouter(
 	createRoutesFromElements(
@@ -68,6 +68,14 @@ const router = createBrowserRouter(
 				element={
 					<Protected authentication>
 						<EditPost />
+					</Protected>
+				}
+			/>
+			<Route
+				path='/profile/:id'
+				element={
+					<Protected authentication>
+						<Profile />
 					</Protected>
 				}
 			/>

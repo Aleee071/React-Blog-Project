@@ -22,7 +22,7 @@ function Header() {
 		if (userData) {
 			setUserName(userData.name);
 		}
-	}, [userName, userData]);
+	}, [userName, userData, status]);
 
 	const navItems = [
 		{ name: "Home", path: "/", active: true },
@@ -65,7 +65,7 @@ function Header() {
 													const baseClasses =
 														"px-4 py-2 text-sm font-medium tracking-wide rounded-lg transition-all duration-300 relative block";
 													const activeClasses = isActive
-														? "text-white bg-blue-500/20 shadow-lg"
+														? "text-white bg-blue-500/10  shadow-lg"
 														: "text-white/70 hover:text-white hover:bg-white/5";
 													const underlineClasses = `after:content-[''] after:absolute after:left-4 after:right-4 after:-bottom-0.5 after:h-0.5 after:bg-blue-500 after:transition-transform after:duration-300 after:transform after:origin-left after:rounded-full after:${
 														isActive
@@ -85,10 +85,19 @@ function Header() {
 					</div>
 
 					{/* Right Section: User Info & Mobile Menu */}
-					<div className='flex items-center space-x-4'>
+					<div className='flex items-center md:space-x-4 space-x-2'>
 						{/* User Info */}
 						{status ? (
-							<div className='hidden md:flex items-center gap-2 text-sm font-medium text-white bg-slate-800/90 px-4 py-2 rounded'>
+							<NavLink
+								to={`/profile/${userData?.$id}`}
+								className={({ isActive }) => {
+									return `flex items-center gap-2 text-sm font-medium px-4 py-2 rounded-md transition-all duration-300 ${
+										isActive
+											? "bg-gradient-to-r from-blue-600 to-blue-700 text-white shadow-lg border-none ring-2 ring-blue-500/50"
+											: "bg-slate-800/70 text-white border border-slate-700/90 hover:bg-slate-800/90"
+									}`;
+								}}
+							>
 								<svg
 									className='w-4 h-4'
 									fill='currentColor'
@@ -96,10 +105,12 @@ function Header() {
 								>
 									<path d='M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z'></path>
 								</svg>
-								{userName}
-							</div>
+								<span className='text-xs md:text-sm whitespace-nowrap leading-normal'>
+									{userName}
+								</span>
+							</NavLink>
 						) : (
-							<div className='text-sm font-medium text-white bg-slate-800/90 px-4 py-2 rounded'>
+							<div className=' text-xs md:text-md font-medium text-white bg-slate-800/90 px-4 py-2 rounded'>
 								No user logged in
 							</div>
 						)}
@@ -148,7 +159,7 @@ function Header() {
 							isMenuOpen ? "block" : "hidden"
 						} md:hidden absolute top-full left-0 right-0 bg-slate-900/95 backdrop-blur-md border-t border-slate-700/50 transition-all duration-300 transform`}
 					>
-						<ul className='p-4 space-y-2 h-screen'>
+						<ul className='p-4 space-y-2 h-screen backdrop-blur-md opacity-100 bg-gradient-to-br from-slate-800/90 to-slate-950/100'>
 							{navItems.map(
 								(item) =>
 									item.active && (
