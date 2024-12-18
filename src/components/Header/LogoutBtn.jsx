@@ -15,15 +15,9 @@ function LogoutBtn() {
 			const response = await accountManager.logout();
 			if (response) {
 				dispatch(logout());
-				setToastMessage("Logout successful!");
-				setShowToast(true);
-				setTimeout(() => {
-					navigate("/");
-				}, 2000);
+				navigate("/login");
 			}
 		} catch (error) {
-			setShowToast(true);
-			setToastMessage("Logout failed. Please try again.");
 			console.error("Error during logout:", error);
 			setError(error);
 		}

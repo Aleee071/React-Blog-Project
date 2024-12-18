@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { useParams, useNavigate, Link } from "react-router-dom";
+import { useParams, useNavigate, Link, NavLink } from "react-router-dom";
 import parse from "html-react-parser";
 import { Button, Toast, Input } from "../components";
 import fileManager from "../appwrite/fileHandling";
@@ -25,11 +25,13 @@ function Post() {
 	const [isEditMode, setIsEditMode] = useState(false);
 	const [editId, setEditId] = useState(null);
 	const [editedComment, setEditedComment] = useState("");
+	const [userName, setUserName] = useState("");
 
 	const { id } = useParams();
 	const navigate = useNavigate();
 	const dispatch = useDispatch();
 
+	const status = useSelector((state) => state.auth.status);
 	const userData = useSelector((state) => state.auth.userData);
 	const isAuthor = post && userData ? post.userId === userData.$id : false;
 	const isCommenter = (commentUserId) => {
@@ -48,6 +50,9 @@ function Post() {
 	}, [id, navigate]);
 
 	useEffect(() => {
+		if (post) {
+			setUserName(post.userName);
+		}
 		try {
 			commentManager.getComments(id).then((comments) => {
 				if (comments && comments.documents.length > 0) {
@@ -217,10 +222,39 @@ function Post() {
 								</div>
 							)}
 						</div>
-						<div className='w-full mb-6'>
+						<div className='w-full flex justify-between mb-6'>
 							<h1 className='text-3xl font-bold uppercase tracking-wide text-white/90 pb-2 border-b-2 border-blue-500/30'>
 								{post.title}
 							</h1>
+							<div>
+								{status ? (
+									<NavLink
+										to={`/profile/${post?.userId}`}
+										className={({ isActive }) => {
+											return `flex items-center gap-2 text-sm font-medium px-4 py-2 rounded-md transition-all duration-300 ${
+												isActive
+													? "bg-gradient-to-r from-blue-600 to-blue-700 text-white shadow-lg border-none ring-2 ring-blue-500/50"
+													: "bg-slate-800/70 text-white border border-slate-700/90 hover:bg-slate-800/90"
+											}`;
+										}}
+									>
+										<svg
+											className='w-4 h-4'
+											fill='currentColor'
+											viewBox='0 0 20 20'
+										>
+											<path d='M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z'></path>
+										</svg>
+										<span className='text-xs md:text-sm whitespace-nowrap leading-normal'>
+											{userName}
+										</span>
+									</NavLink>
+								) : (
+									<div className=' text-xs md:text-md font-medium text-white bg-slate-800/90 px-4 py-2 rounded'>
+										No user logged in
+									</div>
+								)}
+							</div>
 						</div>
 						<div className='browser-css tracking-normal text-base text-white/80 leading-relaxed'>
 							{parse(post.content)}

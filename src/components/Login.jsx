@@ -25,7 +25,7 @@ function Login() {
 			const session = await accountManager.login(data);
 			if (session) {
 				const userData = await accountManager.getSession();
-				if (userData) dispatch(authLogin(userData));
+				if (userData) dispatch(authLogin({ userData }));
 				setShowToast(true);
 				setTimeout(() => {
 					navigate("/");

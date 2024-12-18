@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 import postManager from "../appwrite/postHandling";
 import { Toast, PostCard } from "../components/index";
+import { useParams } from "react-router-dom";
 
 function Profile() {
 	const userData = useSelector((state) => state.auth.userData);
@@ -10,6 +11,10 @@ function Profile() {
 	const [showToast, setShowToast] = useState(false);
 	const [toastMessage, showToastMessage] = useState("");
 	const [isLoading, setIsLoading] = useState(true);
+	const [postUser, setPostUser] = useState({});
+	const { id } = useParams();
+
+	const isOwnProfile = userData?.$id === id;
 
 	const handleCloseToast = () => {
 		setShowToast(false);
@@ -24,7 +29,19 @@ function Profile() {
 			}
 
 			try {
-				const posts = await postManager.getPostsByUserId(userData.$id);
+				const posts = await postManager.getPostsByUserId(id);
+
+				if (posts?.documents.length === 0) {
+					setPostUser({
+						userName: userData.name,
+						email: userData.email,
+					});
+				} else {
+					setPostUser({
+						userName: posts?.documents[0]?.userName,
+						email: posts?.documents[1]?.userEmail,
+					});
+				}
 
 				if (posts?.documents.length > 0) {
 					setPosts(posts.documents);
@@ -37,10 +54,7 @@ function Profile() {
 				}
 			} catch (error) {
 				console.error("Appwrite service :: getPostsByUserId :: error: ", error);
-				setToast({
-					message: "Failed to load posts. Please try again.",
-					type: "error",
-				});
+				showToastMessage("Failed to load posts. Please try again.", "error");
 				setShowToast(true);
 				setPosts([]);
 			}
@@ -48,7 +62,7 @@ function Profile() {
 			setIsLoading(false);
 		};
 		loadPosts();
-	}, [userData]);
+	}, [id]);
 
 	if (!userData) {
 		return (
@@ -64,10 +78,17 @@ function Profile() {
 		<div className='w-full min-h-screen bg-gray-900'>
 			<div className='max-w-7xl mx-auto space-y-6 p-4'>
 				<div className='bg-gray-800 rounded-lg shadow-lg p-6'>
-					<h1 className='text-3xl font-bold text-white mb-2'>
-						Welcome, {userData.name}
-					</h1>
-					<p className='text-gray-300 mb-4'>{userData.email}</p>
+					{isOwnProfile ? (
+						<h1 className='text-3xl font-bold text-white mb-2'>
+							Welcome, {postUser.userName}
+						</h1>
+					) : (
+						<h1 className='text-3xl font-bold text-white mb-2'>
+							Profile: {postUser.userName}
+						</h1>
+					)}
+
+					<p className='text-gray-300 mb-4'>{postUser.email}</p>
 				</div>
 
 				<Toast
@@ -77,7 +98,16 @@ function Profile() {
 				/>
 
 				<div className='bg-gray-800 rounded-lg shadow-lg p-6'>
-					<h2 className='text-2xl font-semibold text-white mb-6'>Your Posts</h2>
+					{isOwnProfile ? (
+						<h2 className='text-2xl font-semibold text-white mb-6'>
+							Your Posts<span className='text-blue-400'>.</span>
+						</h2>
+					) : (
+						<h2 className='text-2xl font-semibold text-white mb-6'>
+							Their Posts<span className='text-blue-400'>.</span>
+						</h2>
+					)}
+
 					{isLoading ? (
 						<div className='flex items-center justify-center py-8'>
 							<div className='animate-spin rounded-full h-12 w-12 border-4 border-primary border-t-transparent'></div>

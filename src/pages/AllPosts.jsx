@@ -21,7 +21,7 @@ function AllPosts() {
 		async function fetchPosts() {
 			try {
 				if (posts.length > 0) {
-					localStorage.setItem("allPosts", JSON.stringify(posts));
+					// localStorage.setItem("allPosts", JSON.stringify(posts));
 
 					console.log("posts fetched from store");
 
@@ -32,24 +32,24 @@ function AllPosts() {
 				}
 
 				//Fetch posts from localStorage
-				const cachedPosts = localStorage.getItem("allPosts");
-				if (cachedPosts) {
-					dispatch(fetchPostsSuccess({ posts: JSON.parse(cachedPosts) }));
+				// const cachedPosts = localStorage.getItem("allPosts");
+				// if (cachedPosts) {
+				// 	dispatch(fetchPostsSuccess({ posts: JSON.parse(cachedPosts) }));
 
-					console.log("posts fetched from local storage");
+				// 	console.log("posts fetched from local storage");
 
-					setLoading(false);
-					setToastMessage("Posts loaded successfully!");
-					setShowToast(true);
-					return;
-				}
+				// 	setLoading(false);
+				// 	setToastMessage("Posts loaded successfully!");
+				// 	setShowToast(true);
+				// 	return;
+				// }
 
 				//Fetch posts from Appwrite
 				const response = await postManager.getAllPosts();
 				if (response) {
 					const fetchedPosts = response.documents;
 					dispatch(fetchPostsSuccess({ posts: fetchedPosts }));
-					localStorage.setItem("allPosts", JSON.stringify(fetchedPosts));
+					// localStorage.setItem("allPosts", JSON.stringify(fetchedPosts));
 
 					console.log("posts fetched from Appwrite");
 

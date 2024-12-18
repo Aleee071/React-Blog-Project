@@ -61,6 +61,7 @@ function PostForm({ post }) {
 				imageId: file ? file.$id : post?.imageId,
 				userId: userData.$id,
 				userName: userData.name,
+				userEmail: userData.email,
 			};
 
 			let dbPost;

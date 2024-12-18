@@ -11,13 +11,21 @@ export class PostManager {
 		this.databases = new Databases(this.client);
 	}
 
-	async createPost({ title, content, imageId, status, userId, userName }) {
+	async createPost({
+		title,
+		content,
+		imageId,
+		status,
+		userId,
+		userName,
+		userEmail,
+	}) {
 		try {
 			return await this.databases.createDocument(
 				conf.appwriteDatabaseId,
 				conf.collections.posts,
 				ID.unique(),
-				{ title, content, imageId, status, userId, userName }
+				{ title, content, imageId, status, userId, userName, userEmail }
 			);
 		} catch (error) {
 			console.log("appwrite service :: createPost :: error", error);
@@ -27,7 +35,7 @@ export class PostManager {
 
 	async updatePost(
 		documentID,
-		{ title, content, imageId, status, userId, userName }
+		{ title, content, imageId, status, userId, userName, userEmail }
 	) {
 		if (!documentID)
 			throw new Error(
@@ -39,7 +47,7 @@ export class PostManager {
 				conf.appwriteDatabaseId,
 				conf.collections.posts,
 				documentID,
-				{ title, content, imageId, status, userId, userName }
+				{ title, content, imageId, status, userId, userName, userEmail }
 			);
 			return updatedDoc;
 		} catch (error) {
