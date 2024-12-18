@@ -18,6 +18,7 @@ import Post from "./pages/Post.jsx";
 import AllPosts from "./pages/AllPosts.jsx";
 import EditPost from "./pages/EditPost.jsx";
 import Profile from "./pages/Profile.jsx";
+import About from "./pages/About.jsx";
 
 const router = createBrowserRouter(
 	createRoutesFromElements(
@@ -76,6 +77,14 @@ const router = createBrowserRouter(
 				element={
 					<Protected authentication>
 						<Profile />
+					</Protected>
+				}
+			/>
+			<Route
+				path='/about'
+				element={
+					<Protected>
+						<About />
 					</Protected>
 				}
 			/>

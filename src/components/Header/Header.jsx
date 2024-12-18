@@ -26,6 +26,7 @@ function Header() {
 
 	const navItems = [
 		{ name: "Home", path: "/", active: true },
+		{ name: "About", path: "/about", active: true },
 		{ name: "Login", path: "/login", active: !status },
 		{ name: "Signup", path: "/signup", active: !status },
 		{ name: "All Posts", path: "/all-posts", active: true },
