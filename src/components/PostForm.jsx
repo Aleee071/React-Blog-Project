@@ -135,6 +135,10 @@ function PostForm({ post }) {
 
 	return (
 		<div className='min-h-screen bg-gradient-to-br from-slate-950 via-slate-900 to-blue-950 py-8 md:py-12'>
+			<h2 className='text-2xl md:text-3xl font-bold mb-8 bg-gradient-to-r from-white via-blue-100 to-blue-200 text-transparent bg-clip-text text-center'>
+				{post ? "Edit Post" : "Create New Post"}
+				<span className='text-blue-400'>.</span>
+			</h2>
 			<div className='max-w-6xl mx-auto px-4'>
 				<div className='bg-slate-900/50 backdrop-blur-sm p-6 md:p-8 rounded-2xl border border-slate-700/50 shadow-2xl'>
 					{/* Toast Message */}
@@ -143,10 +147,6 @@ function PostForm({ post }) {
 						show={showToast}
 						onClose={handleCloseToast}
 					/>
-
-					<h2 className='text-2xl md:text-3xl font-bold mb-8 bg-gradient-to-r from-white via-blue-100 to-blue-200 text-transparent bg-clip-text text-center'>
-						{post ? "Edit Post" : "Create New Post"}
-					</h2>
 
 					<form
 						onSubmit={handleSubmit(submit)}

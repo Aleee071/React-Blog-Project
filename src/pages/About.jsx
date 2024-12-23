@@ -107,9 +107,9 @@ const About = () => {
 
 				{/* Personal Section */}
 				<div className='bg-slate-900/50 backdrop-blur-sm rounded-2xl border border-slate-800 p-8 transition-transform duration-300 transform hover:shadow-2xl'>
-					<div className='flex items-center space-x-4 mb-6'>
-						<div className='bg-gradient-to-r from-blue-600 to-blue-400 w-[12vw] h-[12vw] md:w-[5vw] md:h-[5vw] rounded-full flex items-center justify-center'>
-							<span className='text-[5vw] md:text-[2vw] text-white font-bold'>
+					<div className='flex space-x-4 mb-6'>
+						<div className='bg-gradient-to-r from-blue-600 to-blue-400 w-12 h-12 md:w-14 md:h-14 lg:w-16 lg:h-16 rounded-full flex items-center justify-center'>
+							<span className='text-lg md:text-xl lg:text-2xl text-white font-bold'>
 								MS
 							</span>
 						</div>

@@ -32,20 +32,11 @@ function Home() {
 					return;
 				}
 
-				// Try loading posts from localStorage
-				// const cachedPosts = localStorage.getItem("activePosts");
-				// if (cachedPosts && JSON.parse(cachedPosts).length > 0) {
-				// 	dispatch(fetchActivePostsSuccess({ posts: JSON.parse(cachedPosts) }));
-				// 	setLoading(false);
-				// 	return;
-				// }
-
 				// Fetch from Appwrite if not in store or localStorage
 				const response = await postManager.getActivePosts();
 				if (response) {
 					const fetchedPosts = response.documents;
 					dispatch(fetchActivePostsSuccess({ posts: fetchedPosts }));
-					// localStorage.setItem("activePosts", JSON.stringify(fetchedPosts)); // Cache in localStorage
 					setToastMessage("Posts loaded successfully!");
 					setShowToast(true);
 				}
@@ -79,13 +70,20 @@ function Home() {
 						{/* Left Section - Featured Posts */}
 						<div className='w-full md:w-2/3'>
 							<h2 className='text-2xl font-bold mb-6 text-white/90'>
-								Featured Posts
+								Featured Posts<span className='text-blue-500'>.</span>
 							</h2>
 							<div className='grid gap-6'>
 								{posts && posts.length > 0 ? (
-									posts.map((post) => (
-										<PostCard key={post.$id} imageId={post.imageId} {...post} />
-									))
+									posts
+										.slice()
+										.reverse()
+										.map((post) => (
+											<PostCard
+												key={post.$id}
+												imageId={post.imageId}
+												{...post}
+											/>
+										))
 								) : (
 									<div className='col-span-full flex flex-col items-center justify-center min-h-[200px] text-xl md:text-2xl text-slate-400 font-light'>
 										<svg

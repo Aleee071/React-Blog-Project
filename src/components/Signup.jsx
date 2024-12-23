@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { login } from "../store/authSlice";
-import { Button, Input, Toast } from "./index";
+import { Button, Input, Toast, PasswordInput } from "./index";
 import { useDispatch } from "react-redux";
 import accountManager from "../appwrite/accountHandling";
 import { useForm } from "react-hook-form";
@@ -25,7 +25,7 @@ function Signup() {
 			const session = await accountManager.createAccount(data);
 			if (session) {
 				const userData = await accountManager.getSession();
-				if (userData) dispatch(login(userData));
+				if (userData) dispatch(login({ userData }));
 				setShowToast(true);
 				setTimeout(() => {
 					navigate("/");
@@ -98,9 +98,8 @@ function Signup() {
 							})}
 							error={errors.email?.message}
 						/>
-						<Input
+						<PasswordInput
 							label='Password'
-							type='password'
 							placeholder='Enter your password'
 							{...register("password", {
 								required: true,

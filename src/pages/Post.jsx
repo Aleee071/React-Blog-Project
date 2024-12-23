@@ -207,18 +207,18 @@ function Post() {
 							/>
 
 							{isAuthor && (
-								<div className='absolute right-6 top-6 space-x-3'>
+								<div className='absolute right-4 sm:right-6 top-4 sm:top-6 flex gap-2 sm:gap-3'>
 									<Link to={`/edit-post/${post.$id}`}>
-										<Button className='font-medium px-6 py-2 bg-green-500 hover:bg-green-600 transition-colors duration-200 shadow-lg'>
+										<button className='px-3 sm:px-4 py-1.5 sm:py-2 text-sm sm:text-base font-medium text-white bg-gradient-to-r from-emerald-500 to-green-500 hover:from-emerald-600 hover:to-green-600 rounded-lg shadow-lg transform transition-all duration-200 hover:scale-105 active:scale-95'>
 											Edit
-										</Button>
+										</button>
 									</Link>
-									<Button
-										className='bg-red-500 hover:bg-red-600 transition-colors duration-200 font-medium px-6 py-2 shadow-lg'
+									<button
 										onClick={deletePost}
+										className='px-3 sm:px-4 py-1.5 sm:py-2 text-sm sm:text-base font-medium text-white bg-gradient-to-r from-rose-500 to-red-500 hover:from-rose-600 hover:to-red-600 rounded-lg shadow-lg transform transition-all duration-200 hover:scale-105 active:scale-95'
 									>
 										Delete
-									</Button>
+									</button>
 								</div>
 							)}
 						</div>
@@ -356,7 +356,7 @@ function Post() {
 															: comment.userName}
 													</span>
 												</div>
-												<div className='flex items-center'>
+												<div className='flex justify-between  items-center'>
 													<span className='text-white/60 text-sm whitespace-nowrap'>
 														{comment.createdAt}
 													</span>

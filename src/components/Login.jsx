@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { login as authLogin } from "../store/authSlice";
-import { Button, Input, Toast } from "./index";
+import { Button, Input, Toast, PasswordInput } from "./index";
 import { useDispatch } from "react-redux";
 import accountManager from "../appwrite/accountHandling";
 import { useForm } from "react-hook-form";
@@ -46,18 +46,6 @@ function Login() {
 				onClose={() => setShowToast(false)}
 			/>
 			<div className='relative w-full max-w-md'>
-				{/* Background decorative elements */}
-				<div className='absolute inset-0 -z-10 transform-gpu overflow-hidden blur-3xl'>
-					<div
-						className='aspect-[1108/632] w-[69.25rem] flex-none bg-gradient-to-r from-blue-500 to-blue-700 opacity-20'
-						style={{
-							clipPath:
-								"polygon(73.6% 51.7%, 91.7% 11.8%, 100% 46.4%, 97.4% 82.2%, 92.5% 84.9%, 75.7% 64%, 55.3% 47.5%, 46.5% 49.4%, 45% 62.9%, 50.3% 87.2%, 21.3% 64.1%, 0.1% 100%, 5.4% 51.1%, 21.4% 63.9%, 58.9% 0.2%, 73.6% 51.7%)",
-						}}
-					></div>
-				</div>
-
-				{/* Login Form */}
 				<div className='relative bg-slate-900/50 backdrop-blur-xl px-6 py-12 shadow-2xl ring-1 ring-white/10 rounded-2xl'>
 					<h2 className='text-center text-3xl font-bold tracking-tight text-white mb-8'>
 						Welcome Back
@@ -86,9 +74,8 @@ function Login() {
 							})}
 							error={errors.email?.message}
 						/>
-						<Input
+						<PasswordInput
 							label='Password'
-							type='password'
 							placeholder='Enter your password'
 							{...register("password", {
 								required: "Password is required",
@@ -102,7 +89,7 @@ function Login() {
 
 						<Button
 							type='submit'
-							className='w-full bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-500 hover:to-blue-600 text-white py-3 rounded-lg font-medium transition-all duration-200 transform hover:scale-[1.02] disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100'
+							className='w-full bg-gradient-to-r from-blue-600 via-blue-900 to-blue-600/10 hover:from-blue-600 text-white py-3 rounded-lg font-medium transition-all duration-200 transform hover:scale-[1.02] disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100'
 							disabled={loading}
 						>
 							{loading ? (

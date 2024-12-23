@@ -11,6 +11,7 @@ import PostCard from "./PostCard";
 import RTE from "./RTE";
 import Toast from "./ToastMsg";
 import PostForm from "./PostForm";
+import PasswordInput from "./PasswordInput";
 
 export {
 	Input,
@@ -26,4 +27,5 @@ export {
 	RTE,
 	Toast,
 	PostForm,
+	PasswordInput,
 };

@@ -90,7 +90,7 @@ function Header() {
 						{/* User Info */}
 						{status ? (
 							<NavLink
-								to={`/profile/${userData?.$id}`}
+								to={`/profile/${userData.$id}`}
 								className={({ isActive }) => {
 									return `flex items-center gap-2 text-sm font-medium px-4 py-2 rounded-md transition-all duration-300 ${
 										isActive
@@ -125,7 +125,7 @@ function Header() {
 
 						{/* Hamburger Menu Button (Mobile) */}
 						<button
-							className='md:hidden text-white/80 hover:text-blue-500 focus:outline-none transition-all duration-200 p-2 hover:bg-white/5 rounded-lg'
+							className='md:hidden w-auto text-white/80 hover:text-blue-500 focus:outline-none transition-all duration-200 p-2 hover:bg-white/5 rounded-lg'
 							onClick={toggleMenu}
 						>
 							<svg
